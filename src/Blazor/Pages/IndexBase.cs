@@ -5,17 +5,15 @@ using Shared;
 
 namespace Blazor.Pages
 {
-    public class FetchDataBase : ComponentBase
+    public class IndexBase : ComponentBase
     {
         [Inject] private HttpClient Http { get; set; }
 
-        protected WeatherForecast[] _forecasts;
-
         protected override async Task OnInitializedAsync()
         {
+            var configuration = await Http.GetJsonAsync<ConfigurationData>("/configuration.json");
             var configurationHandler = new ConfigurationHandler();
-            var configuration = configurationHandler.Get();
-            _forecasts = await Http.GetJsonAsync<WeatherForecast[]>(configuration.Backend);
+            configurationHandler.Set(configuration);
         }
     }
 }
