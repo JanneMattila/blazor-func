@@ -174,7 +174,13 @@
           "webSocketsEnabled": true,
           "http20Enabled": true,
           "clientAffinityEnabled": false,
-          "ftpsState": "Disabled"
+          "ftpsState": "Disabled",
+          "cors": {
+            "allowedOrigins": [
+              "[concat('https://',variables('appStorageName'),'.z16.web.core.windows.net')]"
+            ],
+            "supportCredentials": true
+          }
         }
       }
     },
