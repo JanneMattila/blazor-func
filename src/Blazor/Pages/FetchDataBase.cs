@@ -14,7 +14,8 @@ namespace Blazor.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            _forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+            var uri = "http://localhost:7071/api/Weather";
+            _forecasts = await Http.GetJsonAsync<WeatherForecast[]>(uri);
         }
     }
 }
