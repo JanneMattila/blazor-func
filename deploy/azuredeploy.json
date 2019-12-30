@@ -177,7 +177,7 @@
           "ftpsState": "Disabled",
           "cors": {
             "allowedOrigins": [
-              "[concat('https://',variables('appStorageName'),'.z16.web.core.windows.net')]"
+              "[concat('https://',variables('webStorageName'),'.z16.web.core.windows.net')]"
             ],
             "supportCredentials": true
           }
@@ -192,10 +192,12 @@
         "[resourceId('Microsoft.Web/sites', variables('appServiceName'))]"
       ],
       "properties": {
-        "StorageConnectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('appStorageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('appStorageName')), '2015-05-01-preview').key1)]",
+        "AzureWebJobsDisableHomepage": "true",
+        "AzureWebJobsStorage": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('appStorageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('appStorageName')), '2018-02-01').keys[0].value)]",
+        "StorageConnectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('appStorageName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('appStorageName')), '2018-02-01').keys[0].value)]",
         "SignalRConnectionString": "[listKeys(resourceId('Microsoft.SignalRService/SignalR', variables('appSignalRName')),'2018-10-01').primaryConnectionString]",
-        "WEBSITES_ENABLE_APP_SERVICE_STORAGE": "false",
-        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "FUNCTIONS_EXTENSION_VERSION": "~3",
         "APPINSIGHTS_INSTRUMENTATIONKEY": "[reference(resourceId('Microsoft.Insights/components', variables('appInsightsName')), '2015-05-01').InstrumentationKey]"
       }
     }
