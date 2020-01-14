@@ -1,8 +1,44 @@
 ﻿@page "/"
 @inherits IndexBase
+@inject IJSRuntime JS
+@inject IAuthenticationManager AuthenticationManager
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
+
+<AuthorizeView>
+    <Authorized>
+        <h4>Hello, @context.User.Identity.Name!</h4>
+        <p>You can only see this content if you're authenticated.</p>
+        <button class="btn btn-primary" @onclick="this.AuthenticationManager.SignOutAsync">Logout</button>
+    </Authorized>
+    <Authorizing>
+        <h4>Authentication in progress</h4>
+        <p>You can only see this content while authentication is in progress.</p>
+    </Authorizing>
+    <NotAuthorized>
+        <h4>You're not signed in</h4>
+        <p>Click button to sign-in.</p>
+        <button class="btn btn-primary" @onclick="SignIn">Login</button>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    [Parameter]
+    public string AdditionalScopes { get; set; }
+
+    private string[] Scopes => this.AdditionalScopes?.Split(',');
+
+    private async void SignIn()
+    {
+        var scopes = new List<string>();
+        scopes.Add("https://graph.microsoft.com/openid");
+        await this.AuthenticationManager.SignInAsync(scopes.ToArray());
+        var token = await AuthenticationManager.GetAccessTokenAsync(scopes.ToArray());
+        Console.WriteLine(token.AccessToken);
+    }
+}
