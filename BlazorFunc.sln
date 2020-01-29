@@ -29,11 +29,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "release", "release", "{EC9C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{C28B4796-8A82-4D04-BC53-9939F765F074}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor", "src\Blazor\Blazor.csproj", "{CEB3FD93-93C5-4FF9-860D-1CFDCD1605F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor", "src\Blazor\Blazor.csproj", "{CEB3FD93-93C5-4FF9-860D-1CFDCD1605F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Func", "src\Func\Func.csproj", "{0CABAF12-A61B-4789-AE25-00B10E8D38A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Func", "src\Func\Func.csproj", "{0CABAF12-A61B-4789-AE25-00B10E8D38A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{8807105B-42DF-4A04-9392-48C3099BBC5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared.csproj", "{8807105B-42DF-4A04-9392-48C3099BBC5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
