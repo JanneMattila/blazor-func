@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using Shared;
+using SharedLibrary;
 
 namespace Blazor.Pages
 {
@@ -15,7 +15,8 @@ namespace Blazor.Pages
         {
             var configurationHandler = new ConfigurationHandler();
             var configuration = configurationHandler.Get();
-            _forecasts = await Http.GetJsonAsync<WeatherForecast[]>(configuration.Backend);
+            var url = $"{configuration.Backend}/api/Weather";
+            _forecasts = await Http.GetJsonAsync<WeatherForecast[]>(url);
         }
     }
 }
