@@ -10,11 +10,16 @@ namespace Func
     public static class SignalRFunction
     {
         [FunctionName("negotiate")]
-        public static SignalRConnectionInfo GetSignalRInfo(
+        public static SharedLibrary.ConnectionInfo GetSignalRInfo(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequest req,
             [SignalRConnectionInfo(HubName = "funchub")] SignalRConnectionInfo connectionInfo)
         {
-            return connectionInfo;
+            // Temp workaround: https://github.com/dotnet/aspnetcore/issues/18697
+            return new SharedLibrary.ConnectionInfo()
+            {
+                Url = connectionInfo.Url,
+                AccessToken = connectionInfo.AccessToken
+            };
         }
 
         [FunctionName("select")]
